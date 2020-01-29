@@ -5,7 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:mainPage="using:MVVMPatternInUWP.App.ViewModels.MainPage"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <mainPage:MainPageViewModel/>
+    </Page.DataContext>
 
     <Grid Background="Silver">
         <StackPanel Orientation="Vertical"
@@ -42,19 +47,19 @@
                             <CompositeTransform ScaleX="0.8" ScaleY="0.8"/>
                         </RadioButton.RenderTransform>
                     </RadioButton>
-                    <RadioButton IsChecked="{Binding IsAddOperation, Mode=TwoWay}"
+                    <RadioButton IsChecked="{Binding IsSumOperation, Mode=TwoWay}"
                                  Content="- (Sum)" Margin="1, 0, -35, 0">
                         <RadioButton.RenderTransform>
                             <CompositeTransform ScaleX="0.8" ScaleY="0.8"/>
                         </RadioButton.RenderTransform>
                     </RadioButton>
-                    <RadioButton IsChecked="{Binding IsAddOperation, Mode=TwoWay}"
+                    <RadioButton IsChecked="{Binding IsMulOperation, Mode=TwoWay}"
                                  Content="+ (Mul)" Margin="1, 0, -35, 0">
                         <RadioButton.RenderTransform>
                             <CompositeTransform ScaleX="0.8" ScaleY="0.8"/>
                         </RadioButton.RenderTransform>
                     </RadioButton>
-                    <RadioButton IsChecked="{Binding IsAddOperation, Mode=TwoWay}"
+                    <RadioButton IsChecked="{Binding IsDivOperation, Mode=TwoWay}"
                                  Content="+ (Div)" Margin="1, 0, -35, 0">
                         <RadioButton.RenderTransform>
                             <CompositeTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -75,7 +80,8 @@
                         Content="Calculate"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Margin="0, 10"/>
+                        Margin="0, 10"
+                        Width="100"/>
             </StackPanel>
         </StackPanel>
     </Grid>

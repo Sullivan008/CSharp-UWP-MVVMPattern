@@ -2,12 +2,12 @@
 {
     public interface ICalculator
     {
-        int Add();
+        int Add(int firstValue, int secondValue);
 
-        int Sum();
+        int Sum(int firstValue, int secondValue);
 
-        int Mul();
+        int Mul(int firstValue, int secondValue);
 
-        int Div();
+        double Div(int firstValue, int secondValue);
     }
 }

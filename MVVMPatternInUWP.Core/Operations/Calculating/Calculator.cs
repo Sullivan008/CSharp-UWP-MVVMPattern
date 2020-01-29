@@ -5,39 +5,29 @@ namespace MVVMPatternInUWP.Core.Operations.Calculating
 {
     public class Calculator : ICalculator
     {
-        private readonly int _firstValue;
-
-        private readonly int _secondValue;
-
-        public Calculator(int firstValue, int secondValue)
+        public int Add(int firstValue, int secondValue)
         {
-            _firstValue = firstValue;
-            _secondValue = secondValue;
+            return firstValue + secondValue;
         }
 
-        public int Add()
+        public int Sum(int firstValue, int secondValue)
         {
-            return _firstValue + _secondValue;
+            return firstValue - secondValue;
         }
 
-        public int Sum()
+        public int Mul(int firstValue, int secondValue)
         {
-            return _firstValue - _secondValue;
+            return firstValue * secondValue;
         }
 
-        public int Mul()
+        public double Div(int firstValue, int secondValue)
         {
-            return _firstValue * _secondValue;
-        }
-
-        public int Div()
-        {
-            if (_secondValue == 0)
+            if (secondValue == 0)
             {
                 throw new DivideByZeroException("Division by zero is not allowed!");
             }
 
-            return _firstValue / _secondValue;
+            return (double)firstValue / secondValue;
         }
     }
 }
