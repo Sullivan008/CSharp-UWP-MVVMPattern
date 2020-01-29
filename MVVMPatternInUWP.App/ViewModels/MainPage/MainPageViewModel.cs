@@ -1,5 +1,6 @@
 ﻿using MVVMPatternInUWP.App.Command;
 using MVVMPatternInUWP.App.Dialogs;
+using MVVMPatternInUWP.Core.Interfaces.Calculating;
 using MVVMPatternInUWP.Core.Operations.Calculating;
 using System;
 using System.Windows.Input;
@@ -8,7 +9,7 @@ namespace MVVMPatternInUWP.App.ViewModels.MainPage
 {
     public class MainPageViewModel : MainPageViewModelBase
     {
-        private readonly Calculator _calculator;
+        private readonly ICalculator _calculator;
 
         private int _firstValue;
         private int _secondValue;
@@ -23,9 +24,14 @@ namespace MVVMPatternInUWP.App.ViewModels.MainPage
 
         public MainPageViewModel()
         {
-            _firstValue = _secondValue = 0;
+            _firstValue = 0;
+            _secondValue = 0;
             _result = 0.0;
-            _isAddOperation = _isSumOperation = _isMulOperation = _isDivOperation = _isAnyRadioBtnCheck = false;
+            _isAddOperation = false;
+            _isSumOperation = false;
+            _isMulOperation = false;
+            _isDivOperation = false;
+            _isAnyRadioBtnCheck = false;
 
             _calculator = new Calculator();
         }
@@ -54,7 +60,7 @@ namespace MVVMPatternInUWP.App.ViewModels.MainPage
 
         public double Result
         {
-            get => -_result * - 1;
+            get => -_result * -1;
             set
             {
                 _result = value;
@@ -127,6 +133,9 @@ namespace MVVMPatternInUWP.App.ViewModels.MainPage
         public ICommand CalculateBtnClick =>
             new DelegateCommand(CalculateResult);
 
+        public ICommand DeselectSelectedOperationBtnClick =>
+            new DelegateCommand(DeselectSelectedOperation);
+
         #endregion
 
         #region PRIVATE COMMAND Helper Methods
@@ -156,6 +165,15 @@ namespace MVVMPatternInUWP.App.ViewModels.MainPage
                     await new NotificationDialog(ex.Message, "ERROR").ShowDialog().ShowAsync();
                 }
             }
+        }
+
+        private void DeselectSelectedOperation()
+        {
+            IsAddOperation = false;
+            IsSumOperation = false;
+            IsMulOperation = false;
+            IsDivOperation = false;
+            IsAnyRadioBtnCheck = false;
         }
 
         #endregion

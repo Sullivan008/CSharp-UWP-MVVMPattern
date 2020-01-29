@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Dialogs\NotificationDialog.cs" />
+    <Compile Include="Extensions\BoolToVisibilityConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

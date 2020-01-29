@@ -4,13 +4,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    xmlns:extensions="using:MVVMPatternInUWP.App.Extensions"
     xmlns:mainPage="using:MVVMPatternInUWP.App.ViewModels.MainPage"
+    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.DataContext>
         <mainPage:MainPageViewModel/>
     </Page.DataContext>
+    <Page.Resources>
+        <extensions:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+    </Page.Resources>
 
     <Grid Background="Silver">
         <StackPanel Orientation="Vertical"
@@ -75,13 +79,25 @@
                     <TextBlock Text="{Binding Result, Mode=TwoWay}"
                            Width="350"/>
                 </StackPanel>
-                <Button Command="{Binding CalculateBtnClick}"
-                        IsEnabled="{Binding IsAnyRadioBtnCheck}"
-                        Content="Calculate"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Margin="0, 10"
-                        Width="100"/>
+                <StackPanel Width="400"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0, 15">
+                    <Button Command="{Binding CalculateBtnClick}"
+                            IsEnabled="{Binding IsAnyRadioBtnCheck}"
+                            Content="Calculate"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="60, 10, 60, 10"
+                            Width="100"/>
+                    <Button Command="{Binding DeselectSelectedOperationBtnClick}"
+                            Visibility="{Binding IsAnyRadioBtnCheck, Converter={StaticResource boolToVisibilityConverter}}"
+                            Content="Deselect Operation"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0, 10, 0, 10"
+                            Width="150"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>
